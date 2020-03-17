@@ -63,7 +63,7 @@ notesRouter
             error: { message: `Note doesn't exist` }
           })
         }
-        res.user = user
+        //res.user = user
         next()
       })
       .catch(next)
