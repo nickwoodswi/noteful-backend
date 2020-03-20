@@ -63,7 +63,6 @@ notesRouter
             error: { message: `Note doesn't exist` }
           })
         }
-        //res.user = user
         next()
       })
       .catch(next)
@@ -75,28 +74,6 @@ notesRouter
     NotesService.deleteNote(
       req.app.get('db'),
       req.params.note_id
-    )
-      .then(numRowsAffected => {
-        res.status(204).end()
-      })
-      .catch(next)
-  })
-  .patch(jsonParser, (req, res, next) => {
-    const { note_name } = req.body
-    const noteToUpdate = { note_name }
-
-    const numberOfValues = Object.values(noteToUpdate).filter(Boolean).length
-    if (numberOfValues === 0)
-      return res.status(400).json({
-        error: {
-          message: `Request body must contain 'name'`
-        }
-      })
-
-    NotesService.updateNote(
-      req.app.get('db'),
-      req.params.note_id,
-      noteToUpdate
     )
       .then(numRowsAffected => {
         res.status(204).end()
